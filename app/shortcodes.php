@@ -4,9 +4,13 @@
 
 $shortcode->add(
     'MoCCPostersStats',
-    'moccPosters::getStats'
+    'moccPosters::getStats',
+    [
+        'post_id' => 'id'
+    ]
 );
 
+/*
 // TODO ->
 $shortcode->add(
     'MoCCPostersStats',
@@ -30,3 +34,4 @@ $shortcode->add(
     'MoCCPostersStats',
     'moccPosters::getMaps'
 );
+ */
