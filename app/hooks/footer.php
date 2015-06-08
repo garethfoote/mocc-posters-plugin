@@ -41,30 +41,3 @@ JS;
 }
 
 add_action('get_footer', 'mocc_add_script');
-
-function mocc_render_stats(){
-    $html = <<<HTML
-<div class="moccStats">
-
-    <div class="moccStats-count">
-        <h3>Visits</h3>
-    </div>
-
-    <div class="moccStats-locations"></div>
-        <h3>Visits with location</h3>
-    </div>
-
-    <div class="moccStats-yourLocation"></div>
-        <h3>Your location</h3>
-        <div class="js-moccStats-locationImg"></div>
-    </div>
-
-</div>
-
-HTML;
-
-    echo $html;
-
-}
-add_action('mocc_stats', 'mocc_render_stats', 11);
-
