@@ -2,9 +2,12 @@
 
 use MoCCPosters\Helper;
 
-session_start();
+if( isset($_SESSION) !== true ){
+    session_start();
+}
 
-function mocc_count_visit($post){
+function mocc_count_visit(){
+    global $post;
 
     if( $_SESSION['counted'] === true ){
         return;
@@ -21,4 +24,4 @@ function mocc_count_visit($post){
 
 }
 
-add_action('the_post', 'mocc_count_visit', 11);
+add_action('get_header', 'mocc_count_visit', 11);
