@@ -20,16 +20,17 @@ Geolocate.prototype.init = function(){
 
 Geolocate.prototype.success =  function(position) {
 
-  var latitude  = position.coords.latitude;
-  var longitude = position.coords.longitude;
-
-  // output.innerHTML = '<p>Latitude is ' + latitude + '° <br>Longitude is ' + longitude + '°</p>';
+  var latitude  = parseFloat(position.coords.latitude).toFixed(8);
+  var longitude = parseFloat(position.coords.longitude).toFixed(8);
 
   var img = new Image();
   img.src = "https://maps.googleapis.com/maps/api/staticmap?center=" + latitude + "," + longitude + "&zoom=13&size=300x300&sensor=false";
 
-  $('.js-moccStats-locationImg').html(img);
+  $('.js-locationImg').html(img);
 
+  if(window.MoCCPosters.located === false){
+    this.post(latitude, longitude);
+  }
 };
 
 Geolocate.prototype.error =  function(position) {
@@ -37,15 +38,17 @@ Geolocate.prototype.error =  function(position) {
   console.error('no such luck');
 };
 
-Geolocate.prototype.post = function() {
+Geolocate.prototype.post = function(lat, lng) {
 
-  var jqXHR = $.post(window.ajaxURL, {
+  var jqXHR = $.post(window.MoCCPosters.ajaxURL, {
     action        : 'add_location',
-    postID        : window.postID,
-    coords        : { lat: "-33.805789", lng: "151.002060" },
-    security      : window.ajaxNonce
+    postID        : window.MoCCPosters.postID,
+    coords        : { lat: lat, lng: lng },
+    security      : window.MoCCPosters.ajaxNonce
   }, function(res){
     console.log(res);
+    // Increment by the count that we've just posted via AJAX.
+    $('.js-increment').html(parseInt($('.js-increment').html())+1);
   });
 
 };
