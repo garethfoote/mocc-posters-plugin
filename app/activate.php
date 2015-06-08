@@ -7,3 +7,13 @@
 /** @var  \Herbert\Framework\Panel $panel */
 /** @var  \Herbert\Framework\Shortcode $shortcode */
 /** @var  \Herbert\Framework\Widget $widget */
+
+use Illuminate\Database\Capsule\Manager as Capsule;
+Capsule::schema()->create('mocclocations', function($table)
+{
+    $table->increments('id');
+    $table->integer('postID');
+    $table->string('latitude');
+    $table->string('longitude');
+
+});
