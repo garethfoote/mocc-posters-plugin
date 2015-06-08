@@ -7,3 +7,18 @@ $router->post([
     'uri'  => '/mocc-save-location',
     'uses' => __NAMESPACE__ . '\Controllers\AjaxController@saveLocation'
 ]);
+
+$router->get([
+    'as'   => 'moccClearSession',
+    'uri'  => '/mocc-clear-session',
+    'uses' => function() {
+        session_unset();
+        return 'cleared';
+    }
+]);
+
+$router->get([
+    'as'   => 'moccClearData',
+    'uri'  => '/mocc-clear-data/{id}',
+    'uses' => __NAMESPACE__ . '\Controllers\StatsController@clearStats'
+]);
