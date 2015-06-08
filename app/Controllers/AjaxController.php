@@ -1,19 +1,8 @@
 <?php namespace MoCCPosters\Controllers;
 
-use Herbert\Framework\Models\Post;
 use MoCCPosters\Models\Mocclocation;
 
 class AjaxController {
-
-    /**
-     * Show the post for the given id.
-     **/
-    public function showPost($id)
-    {
-        $post = Post::find($id);
-
-        return view('@MyPlugin/post/single.twig', ['post' => $post]);
-    }
 
     /**
      * Check ajax nonce.
