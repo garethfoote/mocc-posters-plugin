@@ -8,6 +8,35 @@ $container->enqueue->front([
     'filter' => [ 'postType' => 'poster' ]
 ], 'footer');
 
+$container->enqueue->front([
+    'as'     => 'leafletJS',
+    'src'    => Helper::assetUrl('/vendor/leaflet/leaflet.js'),
+    'filter' => [ 'postType' => 'poster' ]
+], 'footer');
+
+$container->enqueue->front([
+    'as'     => 'leafletCSS',
+    'src'    => Helper::assetUrl('/vendor/leaflet/leaflet.css'),
+    'filter' => [ 'postType' => 'poster' ]
+], 'footer');
+
+$container->enqueue->front([
+    'as'     => 'leafletClusterJS',
+    'src'    => Helper::assetUrl('/vendor/leaflet/leaflet.markercluster.js'),
+    'filter' => [ 'postType' => 'poster' ]
+], 'footer');
+
+$container->enqueue->front([
+    'as'     => 'moccPostersCSS',
+    'src'    => Helper::assetUrl('/styles/mocc-posters.css'),
+    'filter' => [ 'postType' => 'poster' ]
+], 'footer');
+
+$container->enqueue->front([
+    'as'     => 'mapJS',
+    'src'    => Helper::assetUrl('/scripts/map.js'),
+    'filter' => [ 'postType' => 'poster' ]
+], 'footer');
 
 function mocc_add_script() {
 
@@ -19,16 +48,20 @@ function mocc_add_script() {
         return;
     }
 
-    $ajaxUrl = admin_url('admin-ajax.php');
+    $ajaxUrl = rtrim(home_url(), '/') . '/mocc-save-location';
     $ajaxNonce = wp_create_nonce( "ajax-geolocation" );
-    $jqueryUrl = Helper::assetUrl('/vendor/jquery.min.js');
+    $located = (isset($_SESSION['located']) === true) ? 'true' : 'false';
     $postID = get_the_ID();
+    $jqueryUrl = Helper::assetUrl('/vendor/jquery.min.js');
 
     $script = <<<JS
 <script>
-    window.ajaxURL = "$ajaxUrl";
-    window.ajaxNonce = "$ajaxNonce";
-    window.postID = "$postID";
+    window.MoCCPosters = {};
+    window.MoCCPosters.ajaxNonce = "$ajaxNonce";
+    window.MoCCPosters.ajaxURL = "$ajaxUrl";
+    window.MoCCPosters.located = $located;
+    window.MoCCPosters.postID = "$postID";
+
     if(typeof jQuery=='undefined'){
         document.write( '<script src="$jqueryUrl"><\/script>' );
     }

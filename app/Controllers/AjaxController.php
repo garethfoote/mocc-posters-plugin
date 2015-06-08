@@ -38,17 +38,19 @@ class AjaxController {
     public function saveLocation($id)
     {
         if( $this->checkNonce() === false ){
-            // die();
-            echo "Failed nonce";
+            die('Security failed. Nonce not recognized');
         }
 
         if( $this->validateLocationData() === false ){
-            die();
+            die('Invalid coordinates');
+        }
+
+        if( isset($_SESSION['located'])  === true ){
+            die('Already located');
         }
 
         if(($postID = intval($_POST['postID'])) === 0){
-            echo "failed post id";
-            die();
+            die("Not valid post id");
         }
 
         $coords = $_POST['coords'];
@@ -58,9 +60,14 @@ class AjaxController {
             'longitude' => $coords['lng']
         ]);
 
-        echo "Yeah!!!!";
+        if( isset($_SESSION) !== true ){
+            session_start();
+        }
 
-        // return view('@MyPlugin/post/single.twig', ['post' => $post]);
+        $_SESSION['located'] = true;
+
+        die("Successfully recorded location data");
+
     }
 
 }
