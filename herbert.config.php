@@ -70,7 +70,7 @@ return [
      * The APIs to auto-load.
      */
     'apis' => [
-        'MoCCPosters' => __DIR__ . '/app/api.php'
+        'moccPosters' => __DIR__ . '/app/api.php'
     ],
 
     /**

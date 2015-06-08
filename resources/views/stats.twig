@@ -1,0 +1,28 @@
+<div class="moccStats">
+
+    <div class="moccStats-count">
+        <h3>Visits</h3>
+        <span class="moccStats-value">{{visits+1}}</span>
+    </div>
+
+    <div class="moccStats-locations">
+        <h3>Visits with location</h3>
+        <span class="moccStats-value">{{locations|length+1}}</span>
+    </div>
+
+    <div class="moccStats-yourLocation">
+        <h3>Your location</h3>
+        <div class="js-moccStats-locationImg"></div>
+    </div>
+
+</div>
+
+<div class="moccMap">
+
+    {% for loc in locations %}
+    id  {{loc.postID}}
+    lat {{loc.latitude}}
+    lng {{loc.longitude}}
+    {% endfor %}
+
+</div>
