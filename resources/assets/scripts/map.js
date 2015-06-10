@@ -1,6 +1,6 @@
 "use strict";
 
-var Map  = function(config){
+var Map  = function($el, config){
 
   var defaults = {
     // South east'ish. Will be overriden with fitBounds.
@@ -11,11 +11,15 @@ var Map  = function(config){
     }
   };
 
+  if($el.length === 0){
+    return;
+  }
+
+
+  this.$el = $el;
   this.config = $.extend({}, defaults, config);
 
-  var $mapContainer = $('.js-map');
-
-  this.lMap = L.map($mapContainer[0], {
+  this.lMap = L.map($el[0], {
     center: this.config.center,
     zoom: this.config.zoom
   });
@@ -25,7 +29,7 @@ var Map  = function(config){
     attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
   }).addTo(this.lMap);
 
-  this.addMarkers($mapContainer.data('locations'));
+  this.addMarkers($el.data('locations'));
 
 };
 
@@ -46,5 +50,4 @@ Map.prototype.addMarkers = function(data){
 
 };
 
-
-new Map();
+var map = new Map($('.js-map'));

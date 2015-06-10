@@ -48,22 +48,24 @@ function mocc_add_script() {
         return;
     }
 
-    $ajaxUrl = rtrim(home_url(), '/') . '/mocc-save-location';
+    $ajaxURL = rtrim(home_url(), '/') . '/mocc-save-location';
     $ajaxNonce = wp_create_nonce( "ajax-geolocation" );
     $located = (isset($_SESSION['located']) === true) ? 'true' : 'false';
     $postID = get_the_ID();
-    $jqueryUrl = Helper::assetUrl('/vendor/jquery.min.js');
+    $assetURL = Helper::assetUrl('/');
+    $jqueryURL = Helper::assetUrl('/vendor/jquery.min.js');
 
     $script = <<<JS
 <script>
     window.MoCCPosters = {};
+    window.MoCCPosters.assetURL = "$assetURL";
     window.MoCCPosters.ajaxNonce = "$ajaxNonce";
-    window.MoCCPosters.ajaxURL = "$ajaxUrl";
+    window.MoCCPosters.ajaxURL = "$ajaxURL";
     window.MoCCPosters.located = $located;
     window.MoCCPosters.postID = "$postID";
 
     if(typeof jQuery=='undefined'){
-        document.write( '<script src="$jqueryUrl"><\/script>' );
+        document.write( '<script src="$jqueryURL"><\/script>' );
     }
     $ = jQuery;
 </script>

@@ -3,6 +3,7 @@
 var Geolocate  = function(config){
 
   var defaults = {
+    'assetURL' : ''
   };
 
   this.config = $.extend({}, defaults, config);
@@ -18,15 +19,36 @@ Geolocate.prototype.init = function(){
 
 };
 
+Geolocate.prototype.createMap =  function(coords) {
+
+  var $el = $('.js-locationImg');
+  console.log($el);
+
+  var lMap = L.map($el[0], {
+    center: coords,
+    zoom: 15,
+    zoomControl: false
+  });
+
+  // L.Icon.Default.imagePath = window.themeURL+'/assets/styles/images/';
+  L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+  }).addTo(lMap);
+
+  var marker = L.marker(coords).addTo(lMap);
+  marker.bindPopup("<img class=\"moccMap-icon\" width=\"35px\" src='"+this.config.assetURL+"/img/mocc-cctv.png'>");
+
+};
+
 Geolocate.prototype.success =  function(position) {
 
   var latitude  = parseFloat(position.coords.latitude).toFixed(8);
   var longitude = parseFloat(position.coords.longitude).toFixed(8);
 
-  var img = new Image();
-  img.src = "https://maps.googleapis.com/maps/api/staticmap?center=" + latitude + "," + longitude + "&zoom=13&size=300x300&sensor=false";
+  // var img = new Image();
+  // img.src = "https://maps.googleapis.com/maps/api/staticmap?center=" + latitude + "," + longitude + "&zoom=13&size=300x300&sensor=false";
 
-  $('.js-locationImg').html(img);
+  this.createMap([latitude, longitude]);
 
   if(window.MoCCPosters.located === false){
     this.post(latitude, longitude);
@@ -53,4 +75,6 @@ Geolocate.prototype.post = function(lat, lng) {
 
 };
 
-new Geolocate();
+new Geolocate({
+  assetURL : window.MoCCPosters.assetURL
+});
