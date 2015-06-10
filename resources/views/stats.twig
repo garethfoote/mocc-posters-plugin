@@ -1,30 +1,35 @@
-<div class="moccStats">
+<div class="moccStats row">
 
-    <div class="moccStats-count">
-        <h3>Visits</h3>
-        <span class="moccStats-value">{{visits}}</span>
+    <div class="col-sm-4">
+        <div class="moccStats-item">
+            <h3>Visits</h3>
+            <span class="moccStats-item-value">{{visits}}</span>
+        </div>
     </div>
 
-    <div class="moccStats-locations">
-        <h3>Visits with location</h3>
-        <span class="js-increment moccStats-value">{{locations|length}}</span>
+    <div class="col-sm-4">
+        <div class="moccStats-item">
+            <h3>Visits with location</h3>
+            <span class="js-increment moccStats-item-value">{{locations|length}}</span>
+        </div>
     </div>
 
-    <div class="moccStats-yourLocation">
-        <h3>Your location</h3>
-        <div class="js-locationImg"></div>
+    <div class="col-sm-4">
+        <div class="moccStats moccMap">
+        	<h3>Your location</h3>
+        	<div class="js-locationImg moccMap-container"></div>
+        </div>
     </div>
 
 </div>
 
-<div class="moccMap">
-	<div data-locations="{{locationsJSON}}" class="moccMap-container js-map">
+<div class="row">
+    <div class="col-sm-12">
+        <div class="moccMap">
 
-	    {% for loc in locations %}
-	    id  {{loc.postID}}
-	    lat {{loc.latitude}}
-	    lng {{loc.longitude}}
-	    {% endfor %}
+            <h3>All visit location</h3>
+            <div data-locations="{{locationsJSON}}" class="moccMap-container js-map"></div>
 
+	    </div>
 	</div>
 </div>
