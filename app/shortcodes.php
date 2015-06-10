@@ -4,19 +4,42 @@
 
 $shortcode->add(
     'MoCCPostersStats',
-    'moccPosters::getStats',
+    'moccPosters::renderAllStats',
+    [
+        'post_id' => 'id'
+    ]
+);
+
+$shortcode->add(
+    'MoCCPostersVisits',
+    'moccPosters::getVisits',
+    [
+        'post_id' => 'id'
+    ]
+);
+
+$shortcode->add(
+    'MoCCPostersVisitsWithLocation',
+    'moccPosters::getVisitsWithLocation',
+    [
+        'post_id' => 'id'
+    ]
+);
+
+$shortcode->add(
+    'MoCCPostersVisitorLocation',
+    'moccPosters::renderVisitorLocation'
+);
+
+$shortcode->add(
+    'MoCCPostersAllVisitorLocations',
+    'moccPosters::renderAllVisitorLocations',
     [
         'post_id' => 'id'
     ]
 );
 
 /*
-// TODO ->
-$shortcode->add(
-    'MoCCPostersStats',
-    'moccPosters::getUserLocation'
-);
-
 // TODO ->
 $shortcode->add(
     'MoCCPostersStats',

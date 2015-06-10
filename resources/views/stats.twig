@@ -15,21 +15,13 @@
     </div>
 
     <div class="col-sm-4">
-        <div class="moccStats moccMap">
-        	<h3>Your location</h3>
-        	<div class="js-locationImg moccMap-container"></div>
-        </div>
+        {% include '@MoCCPosters/your-location.twig' %}
     </div>
 
 </div>
 
 <div class="row">
     <div class="col-sm-12">
-        <div class="moccMap">
-
-            <h3>All visit location</h3>
-            <div data-locations="{{locationsJSON}}" class="moccMap-container js-map"></div>
-
-	    </div>
+        {% include '@MoCCPosters/all-locations.twig' %}
 	</div>
 </div>

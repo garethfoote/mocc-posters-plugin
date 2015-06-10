@@ -15,21 +15,24 @@ var Map  = function($el, config){
     return;
   }
 
-
   this.$el = $el;
   this.config = $.extend({}, defaults, config);
 
-  this.lMap = L.map($el[0], {
-    center: this.config.center,
-    zoom: this.config.zoom
-  });
+  this.$el.each($.proxy(function(index, el){
 
-  // L.Icon.Default.imagePath = window.themeURL+'/assets/styles/images/';
-  L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-  }).addTo(this.lMap);
+    this.lMap = L.map(el, {
+      center: this.config.center,
+      zoom: this.config.zoom
+    });
 
-  this.addMarkers($el.data('locations'));
+    // L.Icon.Default.imagePath = window.themeURL+'/assets/styles/images/';
+    L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(this.lMap);
+
+    this.addMarkers($el.data('locations'));
+
+  }, this));
 
 };
 

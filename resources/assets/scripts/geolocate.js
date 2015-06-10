@@ -19,12 +19,10 @@ Geolocate.prototype.init = function(){
 
 };
 
-Geolocate.prototype.createMap =  function(coords) {
+Geolocate.prototype.createMap =  function(el, coords) {
 
-  var $el = $('.js-locationImg');
-  console.log($el);
 
-  var lMap = L.map($el[0], {
+  var lMap = L.map(el, {
     center: coords,
     zoom: 15,
     zoomControl: false
@@ -48,7 +46,9 @@ Geolocate.prototype.success =  function(position) {
   // var img = new Image();
   // img.src = "https://maps.googleapis.com/maps/api/staticmap?center=" + latitude + "," + longitude + "&zoom=13&size=300x300&sensor=false";
 
-  this.createMap([latitude, longitude]);
+  $('.js-locationImg').each($.proxy(function(index, el){
+    this.createMap(el, [latitude, longitude]);
+  }, this));
 
   if(window.MoCCPosters.located === false){
     this.post(latitude, longitude);

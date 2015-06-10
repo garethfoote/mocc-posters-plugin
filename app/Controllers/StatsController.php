@@ -6,9 +6,30 @@ use Herbert\Framework\Models\PostMeta;
 class StatsController {
 
     /**
-     * Show the post for the given id.
+     * Just return the number of visits with locations
      **/
-    public function showStats($id)
+    public function getVisitsWithLocation($id)
+    {
+        $locations = Mocclocation::where('postID', '=', $id)->get();
+
+        return count($locations);
+
+    }
+    /**
+     * Just return the number of visits.
+     **/
+    public function getVisits($id)
+    {
+        $count = PostMeta::where('post_id', '=', $id)->where('meta_key', '=', 'mocc_num_visits')->get();
+
+        return $count[0]->meta_value;
+
+    }
+
+    /**
+     * Render all the stats at once.
+     **/
+    public function renderAllStats($id)
     {
 
         $count = PostMeta::where('post_id', '=', $id)->where('meta_key', '=', 'mocc_num_visits')->get();
@@ -20,6 +41,26 @@ class StatsController {
             'visits'        => $count[0]->meta_value
         ]);
 
+    }
+
+    /**
+     * Render all the stats at once.
+     **/
+    public function renderAllVisitorLocations($id)
+    {
+        $locations = Mocclocation::where('postID', '=', $id)->get();
+
+        return view('@MoCCPosters/all-locations.twig', [
+            'locationsJSON' => $locations->toJson(),
+            'locations'     => $locations
+        ]);
+    }
+
+    /**
+     * Render all the stats at once.
+     **/
+    public function renderVisitorLocation(){
+        return view('@MoCCPosters/your-location.twig');
     }
 
     /**
