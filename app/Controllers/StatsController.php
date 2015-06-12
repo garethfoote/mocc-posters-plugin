@@ -22,7 +22,9 @@ class StatsController {
     {
         $count = PostMeta::where('post_id', '=', $id)->where('meta_key', '=', 'mocc_num_visits')->get();
 
-        return $count[0]->meta_value;
+        $count = $count[0]->meta_value;
+
+        return empty($count) ? 0 : $count;
 
     }
 

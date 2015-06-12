@@ -64,7 +64,7 @@ class AjaxController {
             session_start();
         }
 
-        $_SESSION['located'] = true;
+        // $_SESSION['located'] = true;
 
         die("Successfully recorded location data");
 
