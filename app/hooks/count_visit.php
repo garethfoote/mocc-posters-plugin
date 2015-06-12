@@ -9,6 +9,10 @@ if( isset($_SESSION) !== true ){
 function mocc_count_visit(){
     global $post;
 
+    if($post->post_type !== 'poster'){
+        return;
+    }
+
     if( $_SESSION['counted'] === true ){
         return;
     }
@@ -20,8 +24,10 @@ function mocc_count_visit(){
         update_post_meta( $post->ID, 'mocc_num_visits', ($count+1) );
     }
 
-    $_SESSION['counted'] = true;
+    // $_SESSION['counted'] = true;
+
+    echo "<script>alert('DEBUG: Recorded visit : ".$count."');</script>";
 
 }
 
-add_action('get_header', 'mocc_count_visit', 11);
+add_action('shutdown', 'mocc_count_visit', 11);
