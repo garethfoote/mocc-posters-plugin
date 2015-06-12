@@ -45,9 +45,11 @@ class AjaxController {
             die('Invalid coordinates');
         }
 
+        /*
         if( isset($_SESSION['located'])  === true ){
             die('Already located');
         }
+         */
 
         if(($postID = intval($_POST['postID'])) === 0){
             die("Not valid post id");
