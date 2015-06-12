@@ -57,7 +57,7 @@ Geolocate.prototype.success =  function(position) {
 
 Geolocate.prototype.error =  function(position) {
   // TODO: Inform user.
-  console.error('no such luck');
+  alert('Geolocation failed.');
 };
 
 Geolocate.prototype.post = function(lat, lng) {
@@ -70,7 +70,7 @@ Geolocate.prototype.post = function(lat, lng) {
   }, function(res){
     console.log(res);
     // Increment by the count that we've just posted via AJAX.
-    $('.js-increment').html(parseInt($('.js-increment').html())+1);
+    // $('.js-increment').html(parseInt($('.js-increment').html())+1);
   });
 
 };
