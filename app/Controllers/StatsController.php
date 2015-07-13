@@ -41,7 +41,7 @@ class StatsController {
             'locationsJSON' => $locations->toJson(),
             'locations'     => $locations,
             'visits'        => $count[0]->meta_value
-        ]);
+        ])->getBody();
 
     }
 
@@ -55,14 +55,14 @@ class StatsController {
         return view('@MoCCPosters/all-locations.twig', [
             'locationsJSON' => $locations->toJson(),
             'locations'     => $locations
-        ]);
+        ])->getBody();
     }
 
     /**
      * Render all the stats at once.
      **/
     public function renderVisitorLocation(){
-        return view('@MoCCPosters/your-location.twig');
+         return view('@MoCCPosters/your-location.twig')->getBody();
     }
 
     /**
