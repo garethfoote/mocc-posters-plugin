@@ -32,7 +32,7 @@ function mocc_count_visit(){
 
     // $_SESSION['counted'] = true;
 
-    echo "<script>alert('DEBUG: Recorded visit : ".$count."');</script>";
+     echo "<script>console.debug('Recorded visit : ".$count."');</script>";
 
 }
 

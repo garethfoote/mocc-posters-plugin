@@ -47,6 +47,7 @@ Geolocate.prototype.success =  function(position) {
   // img.src = "https://maps.googleapis.com/maps/api/staticmap?center=" + latitude + "," + longitude + "&zoom=13&size=300x300&sensor=false";
 
   $('.js-locationImg').each($.proxy(function(index, el){
+    console.debug('Latitude: '+latitude, 'Longitude: '+longitude);
     this.createMap(el, [latitude, longitude]);
   }, this));
 
